@@ -24,6 +24,16 @@ main {
 }
 
 .title {
+    display: flex;
+    align-items: center;
+}
+
+.title-img {
+    height: 60px;
+    margin-right: 10px;
+}
+
+.title-text {
     font-size: 50px;
     margin: 0;
 }
@@ -54,7 +64,9 @@ main {
 }
 
 .die-num {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: normal;
+    line-height: 1;
 }
 
 .roll-dice {

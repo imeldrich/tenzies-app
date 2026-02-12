@@ -2,6 +2,7 @@ import React from "react"
 import Die from "./Die"
 import {nanoid} from "nanoid"
 import Confetti from "react-confetti"
+import diceImg from "./images/dice.png"
 
 export default function App() {
 
@@ -19,9 +20,28 @@ export default function App() {
 
     function generateNewDie() {
         return {
-            value: Math.ceil(Math.random() * 6),
+            value: dieFace(),
             isHeld: false,
             id: nanoid()
+        }
+    }
+
+    function dieFace() {
+        const randomNum = Math.ceil(Math.random() * 6)
+
+        switch(randomNum) {
+            case 1:
+                return "⚀"
+            case 2:
+                return "⚁"
+            case 3:
+                return "⚂"
+            case 4:
+                return "⚃"
+            case 5:
+                return "⚄"
+            case 6:
+                return "⚅"
         }
     }
     
@@ -66,7 +86,10 @@ export default function App() {
     return (
         <main>
             {tenzies && <Confetti/>}
-            <h1 className="title">Tenzies</h1>
+            <div className="title">
+                <img src={diceImg} className="title-img" alt="Dice icon"/>
+                <h1 className="title-text">Tenzies</h1>
+            </div>
             <p className="instructions">Roll until all dice are the same. 
             Click each die to freeze it at its current value between rolls.</p>
             <div className="dice-container">
