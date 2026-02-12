@@ -8,6 +8,7 @@ export default function App() {
 
     const [dice, setDice] = React.useState(allNewDice())
     const [tenzies, setTenzies] = React.useState(false)
+    const [rollCount, setRollCount] = React.useState(0)
     
     React.useEffect(() => {
         const allHeld = dice.every(die => die.isHeld)
@@ -60,9 +61,11 @@ export default function App() {
                     die :
                     generateNewDie()
             }))
+            setRollCount(oldCount => oldCount + 1)
         } else {
             setTenzies(false)
             setDice(allNewDice())
+            setRollCount(0)
         }
     }
     
@@ -73,7 +76,7 @@ export default function App() {
                 die
         }))
     }
-    
+
     const diceElements = dice.map(die => (
         <Die 
             key={die.id} 
@@ -83,15 +86,24 @@ export default function App() {
         />
     ))
     
+    const titleStyles = {
+        color: tenzies ? "#59E391" : "black"
+    }
+
     return (
         <main>
             {tenzies && <Confetti/>}
             <div className="title">
-                <img src={diceImg} className="title-img" alt="Dice icon"/>
-                <h1 className="title-text">Tenzies</h1>
-            </div>
-            <p className="instructions">Roll until all dice are the same. 
+                <div className="title-logo">
+                    <img src={diceImg} className="title-img" alt="Dice icon"/>
+                    <h1 className="title-text" style={titleStyles}>Tenzies</h1>
+                </div>
+                <p className="instructions">Roll until all dice are the same. 
             Click each die to freeze it at its current value between rolls.</p>
+                <div className="roll-count">
+                    <h3 className="roll-count-text">Roll count: {rollCount}</h3>
+                </div>
+            </div>
             <div className="dice-container">
                 {diceElements}
             </div>
